@@ -7,23 +7,22 @@ public class Name {
         this.input = input.split(" ");
     }
 
-    public boolean checker() {
+    public Student checker() {
         String[] lastNames = new String[input.length - 2];
         for (int i = 1; i < input.length - 1; i++) {
             lastNames[i - 1] = input[i];
         }
         if (!nameChecker(input[0])) {
             System.out.println("Incorrect first name.");
-            return false;
+            return null;
         } else if (!surnameChecker(lastNames)) {
             System.out.println("Incorrect last name.");
-            return false;
+            return null;
         } else if (!emailChecker(input[input.length - 1])) {
             System.out.println("Incorrect email.");
-            return false;
+            return null;
         }
-        System.out.println("The student has been added.");
-        return true;
+        return new Student(input[0], lastNames, input[input.length - 1]);
     }
 
     boolean nameChecker(String name) {
@@ -73,7 +72,6 @@ public class Name {
         for (int i = 0; i < email.length(); i++) {
             if (letters[i].matches("@")) at++;
         }
-        if (email.matches(regexPattern) && at < 2) return true;
-        return false;
+        return email.matches(regexPattern) && at < 2;
     }
 }
