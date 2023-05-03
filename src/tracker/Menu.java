@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -35,6 +36,8 @@ public class Menu {
             } else if ("statistics".equals(next)) {
                 statistics.updateStudentsPerCourse(students);
                 statistics.showData(students);
+            } else if ("notify".equals(next)) {
+                notification();
             } else System.out.println("Error: unknown command!");
         }
     }
@@ -154,5 +157,28 @@ public class Menu {
             }
         } else return 0;
         return 1;
+    }
+
+    public void notification() {
+        int numberOfStudents = 0;
+        for (Student s : students) {
+            boolean notified = false;
+            for (int i = 1; i < 5; i++) {
+                if (s.points[i] >= Statistics.thresholds[i - 1] && !s.notify[i - 1]) {
+                    System.out.println("To: " + s.email);
+                    System.out.println("Re: Your Learning Progress");
+                    String formattedString = Arrays.toString(s.lastNames)
+                            .replace(",", "")
+                            .replace("[", "")
+                            .replace("]", "");
+                    System.out.print("Hello, " + s.name + " " + formattedString +
+                            "! You have accomplished our " + Statistics.courses[i - 1] + " course!\n");
+                    s.notify[i - 1] = true;
+                    if (!notified) numberOfStudents++;
+                    notified = true;
+                }
+            }
+        }
+        System.out.println("Total " + numberOfStudents + " students have been notified.");
     }
 }

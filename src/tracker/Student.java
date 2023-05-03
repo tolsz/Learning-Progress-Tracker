@@ -7,6 +7,7 @@ public class Student {
     String[] lastNames;
     String email;
     int[] points;
+    public boolean[] notify = {false, false, false, false};
 
     public Student(String name, String[] lastNames, String email) {
         this.name = name;

@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class Statistics {
     //constants, number of points needed to finish the course
-    private final double[] thresholds = {600, 400, 480, 550};
-    private final String[] courses = {"Java", "DSA", "Databases", "Spring"};
+    public static final double[] thresholds = {600, 400, 480, 550};
+    public static final String[] courses = {"Java", "DSA", "Databases", "Spring"};
     int[] submissions = new int[4];
     int[] summaryPoints;
     int[] studentsPerCourse;
