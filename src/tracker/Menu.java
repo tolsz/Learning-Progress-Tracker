@@ -6,9 +6,11 @@ import java.util.Set;
 
 public class Menu {
     Set<Student> students;
+    Statistics statistics;
 
     public Menu() {
         students = new HashSet<>();
+        statistics = new Statistics();
     }
 
     public void start() {
@@ -30,6 +32,9 @@ public class Menu {
                 addPoints();
             } else if ("find".equals(next)) {
                 find();
+            } else if ("statistics".equals(next)) {
+                statistics.updateStudentsPerCourse(students);
+                statistics.showData(students);
             } else System.out.println("Error: unknown command!");
         }
     }
@@ -142,6 +147,10 @@ public class Menu {
             }
             for (int i = 1; i < 5; i++) {
                 s.points[i] += pointsInt[i];
+                //add submission if there are some points
+                if (pointsInt[i] != 0) {
+                    statistics.addSubmission(i);
+                }
             }
         } else return 0;
         return 1;
