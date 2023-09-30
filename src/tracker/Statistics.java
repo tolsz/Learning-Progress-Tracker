@@ -162,7 +162,6 @@ public class Statistics {
             case "spring" -> whichOne = 4;
         }
         Map<Integer, Integer> pointsAndID = new HashMap<>();
-        // FIXME
         for (Student s : students) {
             if (s.points[whichOne] != 0) {
                 pointsAndID.put(s.points[0], s.points[whichOne]);
